@@ -2,7 +2,6 @@
     "name": "flowcash",
     "type": "module",
     "private": true,
-
     "scripts": {
         "build": "nuxt build",
         "dev": "nuxt dev",
@@ -10,7 +9,6 @@
         "preview": "nuxt preview",
         "postinstall": "nuxt prepare"
     },
-
     "dependencies": {
         "@edusites/bancos-brasil": "^1.2.0",
         "@nuxt/icon": "^2.2.3",
@@ -23,9 +21,9 @@
         "vue-router": "^5.1.0",
         "vue3-apexcharts": "^1.11.1"
     },
-
     "devDependencies": {
         "@nuxtjs/tailwindcss": "^6.14.0",
+        "@types/node": "^26.1.1",
         "typescript": "^6.0.3",
         "vue-tsc": "^3.3.1"
     }
