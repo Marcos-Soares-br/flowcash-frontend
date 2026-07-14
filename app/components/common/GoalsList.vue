@@ -4,6 +4,7 @@
     defineProps<{
         goals: GoalResponse[];
         from: string;
+        valuesHidden: boolean
     }>();
 
     const emit = defineEmits<{
@@ -98,7 +99,7 @@
                         v-else
                         class="flex justify-between text-xs text-secondary mb-1"
                     >
-                        <span class="sensitive">
+                        <span :class="[valuesHidden  ? 'blur user-select-none': '', 'sensitive']">
                             {{
                                 goal.currentAmount.toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'})
                             }}
@@ -108,7 +109,7 @@
                             }}
                         </span>
 
-                        <span class="text-primary font-medium">
+                        <span :class="[valuesHidden  ? 'blur user-select-none': '', 'text-primary font-medium']">
                             {{
                                 ( (goal.currentAmount / goal.targetAmount) * 100 ).toFixed(0)
                             }}%
