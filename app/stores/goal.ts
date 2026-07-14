@@ -47,6 +47,9 @@ export const useGoalStore = defineStore('goals', {
             try {
                 const response = await goalService.create(goal);
 
+                response.targetAmount = Number(Number(response.targetAmount).toFixed(2)); 
+                response.currentAmount = Number(Number(response.currentAmount).toFixed(2))
+
                 this.goals.push(response);
 
                 return response;
@@ -61,6 +64,9 @@ export const useGoalStore = defineStore('goals', {
                 const response = await goalService.update(id, goal);
 
                 const index = this.goals.findIndex(goal => goal.id === id);
+
+                response.targetAmount = Number(Number(response.targetAmount).toFixed(2)); 
+                response.currentAmount = Number(Number(response.currentAmount).toFixed(2))
 
                 this.goals[index] = response;
 
