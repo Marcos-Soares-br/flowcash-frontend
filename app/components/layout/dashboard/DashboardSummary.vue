@@ -10,9 +10,6 @@
     const emit = defineEmits(['valuesHidden']);
 
     const authStore = useAuthStore();
-    const creditCardStore = useCreditCardStore();
-
-    const invoices = computed(() => creditCardStore.currentInvoices);
 
     const { open } = useModal();
 </script>
@@ -93,7 +90,7 @@
                     <span class="text-xs text-secondary">Transferir</span>
                 </button>
                 <button 
-                    @click="open('invoices', { invoices })"
+                    @click="open('invoices', {})"
                     class="flex flex-col items-center gap-2 bg-background/50 rounded-xl p-2 hover:bg-background transition"
                 >
                     <div class="w-10 h-10 rounded-full bg-purple-400/10 flex items-center justify-center">

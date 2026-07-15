@@ -44,7 +44,7 @@
                     <div class="flex items-center justify-between mb-2">
                         <div class="flex items-center gap-2">
                             <span>
-                                <Icon :name="goal.icon" class="text-foreground w-8 h-8"/>
+                                <Icon :name="goal.icon" class="text-foreground w-6 h-6"/>
                             </span>
 
                             <p class="text-sm h-5 text-foreground font-semibold">
@@ -52,7 +52,7 @@
                             </p>
                         </div>
 
-                        <div class="flex items-center gap-2">
+                        <div v-if="from === 'metas'" class="flex items-center gap-2">
                             <Icon
                                 name="lucide:pencil"
                                 class="w-5 h-5 text-secondary hover:text-secondary-hover ml-auto cursor-pointer"

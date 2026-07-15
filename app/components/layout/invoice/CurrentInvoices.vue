@@ -1,15 +1,9 @@
 <script setup lang="ts">
-    import type { Invoice } from '~/types/credit-card';
-    
-    const props = defineProps({
-        invoices: {
-            type: Array as PropType<Invoice[]>,
-            default: [] as Invoice[],
-        }
-    });
-
     const creditCardStore = useCreditCardStore();
+    creditCardStore.getCurrentInvoices()
+
     const cards = computed(() => creditCardStore.creditCards);
+    const invoices = computed( () => creditCardStore.currentInvoices);
 
     const findCard = (id: string) => cards.value.find(card => card.id === id);
 
