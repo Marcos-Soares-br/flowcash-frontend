@@ -137,7 +137,7 @@ export const useTransactionStore = defineStore('transactions', {
             try {
                 const response = await transactionService.createTransaction(transaction);
 
-                this.updateState(response.date.toISOString().slice(0, 7));
+                this.updateState(String(response.date).slice(0, 7));
 
                 return response;
 
@@ -149,7 +149,7 @@ export const useTransactionStore = defineStore('transactions', {
             try {
                 const response = await transactionService.updateTransaction(id, transaction);
 
-                this.updateState(response.date.toISOString().slice(0, 7));
+                this.updateState(String(response.date).slice(0, 7));
 
                 return response;
 
@@ -158,15 +158,15 @@ export const useTransactionStore = defineStore('transactions', {
             }
 
         },
-        async deleteTransaction(id: string) {
+        async deleteTransaction(id: string, onlyThis: boolean = false, recurrenceId?: string) {
             try {
-                const response = await transactionService.deleteTransaction(id);
+                const response = await transactionService.deleteTransaction(id, onlyThis, recurrenceId );
 
                 const transaction = this.reports.map( r => {
                     return r.report.transactions.find(transaction => transaction.id === id);
                 });
 
-                this.updateState(transaction[0]!.date.toISOString().slice(0, 7));
+                this.updateState(String(transaction[0]!.date).slice(0, 7));
 
                 return response;
 
@@ -180,7 +180,7 @@ export const useTransactionStore = defineStore('transactions', {
             try {
                 const response = await transactionService.createCreditTransaction(creditTransaction);
 
-                this.updateState(response.date.toISOString().slice(0, 7));
+                this.updateState(String(response.date).slice(0, 7));
 
                 return response;
 
@@ -192,7 +192,7 @@ export const useTransactionStore = defineStore('transactions', {
             try {
                 const response = await transactionService.updateCreditTransaction(id, creditTransaction);
 
-                this.updateState(response.date.toISOString().slice(0, 7));
+                this.updateState(String(response.date).slice(0, 7));
 
                 return response;
 
@@ -208,7 +208,7 @@ export const useTransactionStore = defineStore('transactions', {
                     return r.report.creditTransactions.find(t => t.id === id);
                 });
 
-                this.updateState(transaction[0]!.date.toISOString().slice(0, 7));
+                this.updateState(String(transaction[0]!.date).slice(0, 7));
 
                 return response;
 

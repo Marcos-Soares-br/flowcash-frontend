@@ -27,7 +27,7 @@ const isIncome = (type: string) => type === 'INCOME'
             <div
                 v-for="transaction in list" :key="transaction.id"
                 @click="emit('edit', { transaction })"
-                class="flex items-center gap-4 border-b border-border py-4 hover:bg-border cursor-pointer"
+                :class="['flex items-center gap-4 border-b border-border py-4', transaction.id.includes('projected') ? '' : 'hover:bg-border cursor-pointer']"
             > 
                 <div :class="[isIncome(transaction.type) ? 'bg-success/10' : 'bg-error/10','flex items-center justify-center w-10 md:w-12 h-10 md:h-12 rounded-full']">
                     <Icon :name="getIcon(transaction.category) as string" v-if="isIncome(transaction.type)" class="w-6 h-6 text-success"/>

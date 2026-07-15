@@ -46,7 +46,7 @@
         amount: props.transaction.amount || 0 as number,
         date: props.transaction?.date || new Date().toISOString().split('T')[0],
         category: props.transaction.category || "",
-        frequency: props.transaction.frequency || null as "WEEKLY" | "MONTHLY" | "YEARLY" | null,
+        frequency: props.transaction.frequency || null as "MONTHLY" | "YEARLY" | null,
         installment: 1 as number,
         totalInstallments: props.transaction.totalInstallments || 1 as number,
         accountId: props.transaction.accountId || "",
@@ -149,18 +149,22 @@
 
     }
 
+    const deleteModal = ref(false);
+    const onlyThis = ref(false);
+
     async function deleteTransaction(id: string) {
-        if (confirm("Tem certeza que deseja excluir essa transação?")) {
-            try {
-                deleteLoading.value = true;
+        try {
+            deleteLoading.value = true;
 
-                await transactionStore.deleteTransaction(id);
+            await transactionStore.deleteTransaction(
+                id,
+                onlyThis.value
+            );
 
-            } catch (error) {
-                alert(error);
-            } finally {
-                deleteLoading.value = false;
-            }
+        } catch (error) {
+            alert(error);
+        } finally {
+            deleteLoading.value = false;
         }
     }
 </script>
@@ -316,12 +320,11 @@
         <div :class="[props.typeForm === 'edit' ? 'grid gap-4 grid-cols-2' : '']">
             <button
                 v-if="props.typeForm === 'edit'"
-                @click="deleteTransaction(props.transaction.id)"
+                @click="deleteModal = true"
                 type="button"
                 class="bg-error hover:bg-error-hover w-full rounded-xl px-4 py-3 font-semibold text-background transition"
             >
-                <UiLoadSpinner v-if="deleteLoading" />
-                <span v-else><Icon name="lucide:trash"/> Deletar {{ formGeral.type === "INCOME" ? "Receita" : "Despesa" }}</span>
+                <span><Icon name="lucide:trash"/> Deletar {{ formGeral.type === "INCOME" ? "Receita" : "Despesa" }}</span>
             </button>
 
             <button
@@ -334,5 +337,43 @@
 
         </div>
     </form>
+</div>
+
+<div
+    v-if="deleteModal"
+    @click.self="deleteModal = false"
+    class="absolute inset-0 flex items-center justify-center bg-black/40 backdrop-blur"
+    style="z-index: 99999;"
+>
+    <div class="bg-surface rounded-xl p-5 flex flex-col gap-5">
+        <p class="text-foreground text-lg ">
+            Tem certeza que deseja excluir essa transação?
+        </p>
+
+        <div 
+            v-if="props.transaction.recurrenceId"
+            class="text-md text-secondary mx-auto"
+        >
+            <input type="checkbox" v-model="onlyThis"> 
+            Excluir todas próximas transações.
+        </div>
+
+
+        <div class="flex gap-2 justify-between">
+            <button
+                class="bg-error hover:bg-error-hover w-full rounded-md px-4 py-3 font-semibold text-background transition"
+                @click="deleteModal = false"
+            >
+                Cancelar
+            </button>
+
+            <UiButton
+                @click="deleteTransaction(props.transaction.id)"
+            >
+                <UiLoadSpinner v-if="deleteLoading" />
+                <span v-else>Confirmar</span>
+            </UiButton>
+        </div>
+    </div>
 </div>
 </template>

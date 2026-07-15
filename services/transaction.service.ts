@@ -29,7 +29,7 @@ export const transactionService = {
 
     async getDailyCashFlow(month: string) {
         const api = useApi();
-        console.log('KVARATSKHELIA:', month)
+
         return await api<DailyCashFlowResponse[]>(`/transactions/daily-cash-flow/${month}`, {
             method: 'GET'
         });
@@ -63,11 +63,15 @@ export const transactionService = {
         });
     },
 
-    async deleteTransaction(id: string) {
+    async deleteTransaction(id: string, onlyThis: boolean, recurrenceId?: string) {
         const api = useApi();
 
         return await api(`/transactions/${id}`, {
-            method: 'DELETE'
+            method: 'DELETE',
+            body: { 
+                onlyThis,
+                recurrenceId
+            }
         });
     },
 

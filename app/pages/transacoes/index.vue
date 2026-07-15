@@ -125,6 +125,9 @@
         type: 'INCOME' | 'EXPENSE',
         transaction?: Transaction
     ) {
+
+        if(transaction?.id.includes('projected')) return;
+
         transactionsModalType.value = action
         transactionType.value = type
         transactionToEdit.value = transaction
