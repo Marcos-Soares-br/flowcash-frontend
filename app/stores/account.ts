@@ -69,6 +69,8 @@ export const useAccountStore = defineStore('accounts', {
 
                 this.accounts.push(data);
 
+                useTransactionStore().getDashboard();
+
                 return data;
 
             } catch (error) {
@@ -84,6 +86,8 @@ export const useAccountStore = defineStore('accounts', {
 
                 this.accounts[index] = data;
 
+                useTransactionStore().getDashboard();
+
                 return data;
 
             } catch (error) {
@@ -98,6 +102,8 @@ export const useAccountStore = defineStore('accounts', {
                 const index = this.accounts.findIndex(account => account.id === id);
 
                 this.accounts.splice(index, 1);
+
+                useTransactionStore().getDashboard();
 
             } catch (error) {
                 throw error;

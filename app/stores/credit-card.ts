@@ -12,7 +12,7 @@ export const useCreditCardStore = defineStore('creditCards', {
     getters: {
         getAvaliableLimit: (state) => (id: string) => {
             const invoiceAmount = 
-                state.currentInvoices.find(invoice => invoice.creditCardId === id)?.amount || 0;
+                state.currentInvoices.find(invoice => invoice?.creditCardId === id)?.amount || 0;
 
             const limit = state.creditCards.find(creditCard => creditCard.id === id)?.limit || 0;
 
@@ -62,6 +62,7 @@ export const useCreditCardStore = defineStore('creditCards', {
                 if (response[0]) {
 
                     response.forEach(invoice => {
+                        if (!invoice) return;
                         invoice.amount = Number(Number(invoice.amount).toFixed(2));
                         
                         invoice.transactions.forEach(transaction => {

@@ -3,7 +3,9 @@
     creditCardStore.getCurrentInvoices()
 
     const cards = computed(() => creditCardStore.creditCards);
-    const invoices = computed( () => creditCardStore.currentInvoices);
+    const invoices = computed(() =>
+        creditCardStore.currentInvoices.filter(Boolean)
+    );
 
     const findCard = (id: string) => cards.value.find(card => card.id === id);
 
@@ -24,7 +26,7 @@
             class="bg-background w-full max-w-2xl p-4 md:p-8 border border-border rounded-2xl flex flex-col"
         >
             <p class="text-md font-semibold">
-                {{ findCard(invoice.creditCardId)!.name }}
+                {{ findCard(invoice.creditCardId)?.name }}
             </p>
 
             <div>

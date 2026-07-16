@@ -12,7 +12,7 @@
 
     function getInvoiceByCard(creditCardId: string) {
         const cardInvoice = invoices.value.find(
-            invoice => invoice.creditCardId === creditCardId
+            invoice => invoice?.creditCardId === creditCardId
         );
 
         return cardInvoice || { amount: 0 };
