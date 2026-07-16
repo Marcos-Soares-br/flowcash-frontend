@@ -4,8 +4,8 @@ import type { AuthResponse, AuthState, LoginRequest, RegisterRequest } from '~/t
 
 export const useAuthStore = defineStore('auth', {
     state: (): AuthState => ({
-        token: null,
-        userName: null,
+        token: useCookie<string | null>('token').value,
+        userName: useCookie<string | null>('userName').value,
     }),
 
     getters: {
