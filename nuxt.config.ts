@@ -23,6 +23,9 @@ export default defineNuxtConfig({
     app: {
         head: {
             title: 'FlowCash',
+            link: [
+                { rel: 'icon', type: 'image/x-icon', href: '/flowcash-favicon.png' },
+            ],
             meta: [
                 { charset: 'utf-8' },
                 { name: 'viewport', content: 'width=device-width, initial-scale=1' },

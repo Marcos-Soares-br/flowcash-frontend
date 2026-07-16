@@ -24,7 +24,7 @@
 
             loading.value = false;
                 
-            await navigateTo('/');
+            await navigateTo('/dashboard');
         
         } catch (error: any) {
             loading.value = false;
