@@ -60,7 +60,9 @@
         </h2>
 
         <div class="w-[300px] mx-auto flex justify-center">
-            <apexchart type="bar" height="320" :options="chartOptions" :series="series"></apexchart>
+            <ClientOnly>
+                <apexchart type="bar" height="320" :options="chartOptions" :series="series"></apexchart>
+            </ClientOnly>
         </div>
         
         <div class="md:hidden flex justify-between text-secondary text-center">
