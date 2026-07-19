@@ -32,7 +32,11 @@
                 class="bg-card rounded-xl p-4 flex items-center gap-3 cursor-pointer hover:bg-border transition"
             >
                 <div class="w-10 h-10">
-                    <SvgBanco :nome="account.icon" formato="circulo" :tamanho="40" />
+                    <div v-if="account.icon == 'wallet'" class="flex bg-primary rounded-full w-10 h-10">
+                        <Icon name="lucide:wallet" class="w-6 h-6 text-background m-auto" />
+                    </div>
+
+                    <SvgBanco v-else :nome="account.icon" formato="circulo" :tamanho="40" />
                 </div>
                 <div>
                     <p class="text-md font-semibold text-foreground ">{{ account.name }}</p>
